@@ -15,12 +15,12 @@ on:
         required: true
         description: PROJECT Token
 
-env:
-  LT_USERNAME: ${{ secrets.LT_USERNAME }}
-  LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
-  PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
-  LT_SDK_DEBUG: true
-  SMARTUI_DEBUG: true
+# env:
+#   LT_USERNAME: ${{ secrets.LT_USERNAME }}
+#   LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+#   PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+#   LT_SDK_DEBUG: true
+#   SMARTUI_DEBUG: true
 
 jobs:
   smartui-sdk-cloud-github-actions:
