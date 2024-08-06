@@ -15,13 +15,6 @@ on:
         required: true
         description: PROJECT Token
 
-# env:
-#   LT_USERNAME: ${{ secrets.LT_USERNAME }}
-#   LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
-#   PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
-#   LT_SDK_DEBUG: true
-#   SMARTUI_DEBUG: true
-
 jobs:
   smartui-sdk-cloud-github-actions:
     name: SmartUI SDK Cloud
@@ -33,6 +26,12 @@ jobs:
       - name: Install Dependencies and clean directory
         run: |
           npm i @lambdatest/smartui-cli
+
+      - name: Export your Credentials
+        run: |
+          export LT_USERNAME=${{ github.event.inputs.username }}
+          export LT_ACCESS_KEY=${{ github.event.inputs.accessKey }}
+          export PROJECT_TOKEN=${{ github.event.inputs.projectToken }}
           
       - name: Execute your tests
         run: |
