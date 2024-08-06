@@ -4,6 +4,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      username:
+        required: true
+        description: LT Username
+      accessKey:
+        required: true
+        description: LT Access Key
+      projectToken:
+        required: true
+        description: PROJECT Token
 
 env:
   LT_USERNAME: ${{ secrets.LT_USERNAME }}
