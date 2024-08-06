@@ -1,45 +1,31 @@
 name: SmartUI SDK Cloud GitHub Actions
+
 on:
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
-      username:
+      project_token:
+        description: Project Token
         required: true
-        description: LT Username
-      accessKey:
-        required: true
-        description: LT Access Key
-      projectToken:
-        required: true
-        description: PROJECT Token
+
+env:
+  LT_USERNAME: ${{ secrets.LT_USERNAME }}
+  LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
 
 jobs:
-  smartui-sdk-cloud-github-actions:
-    name: SmartUI SDK Cloud
+  smartui_tests:
+    name: Execute SmartUI SDK Cloud Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-      - name: Install Dependencies and clean directory
-        run: |
-          npm i @lambdatest/smartui-cli
+      - name: Install dependencies
+        run: npm i @lambdatest/smartui-cli
 
-      - name: Export your Credentials
-        run: |
-          export LT_USERNAME=${{ github.event.inputs.username }}
-          export LT_ACCESS_KEY=${{ github.event.inputs.accessKey }}
-          export PROJECT_TOKEN=${{ github.event.inputs.projectToken }}
-
-      - name: Print Environment Variables
-        run: |
-          echo "LT_USERNAME: $LT_USERNAME"
-          echo "LT_ACCESS_KEY: $LT_ACCESS_KEY"
-          echo "PROJECT_TOKEN: $PROJECT_TOKEN"
-          
-      - name: Execute your tests
+      - name: Execute SmartUI tests
+        env:
+          PROJECT_TOKEN: ${{ github.event.inputs.project_token }}
         run: |
           npx smartui --version
           npx smartui config:create smartui-web.json
