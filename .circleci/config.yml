@@ -4,7 +4,7 @@ name: "SmartUI Circle CI"
 jobs:
   build:
     docker:
-      - image: cimg/node:20
+      - image: cimg/base:current
     steps:
       - run:
           name: checkout to the root folder
