@@ -7,10 +7,6 @@ jobs:
       - image: cimg/base:current
     steps:
       - run:
-          name: checkout to the root folder
-          command: checkout
-      
-      - run:
           name: Install dependencies
           command: npm install
 
