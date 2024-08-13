@@ -1,15 +1,15 @@
-mage: node:latest
+image: node:latest
 
 stages:
-- build
+  - build
 
 build:
-stage: build
-script:
-- export LT_USERNAME="YOUR_USERNAME"
-- export LT_ACCESS_KEY="YOUR_ACCESS_KEY"
-- export PROJECT_TOKEN=YOUR_SMARTUI_PROJECT_TOKEN
-- npm install @lambdatest/smartui-cli
-- npx smartui --version
-- npx smartui config:create smartui-web.json
-- npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
+  stage: build
+  script:
+    - export LT_USERNAME="LT_USERNAME"
+    - export LT_ACCESS_KEY="LT_ACCESS_KEY"
+    - export PROJECT_TOKEN=PROJECT_TOKEN
+    - npm install @lambdatest/smartui-cli
+    - npx smartui --version
+    - npx smartui config:create smartui-web.json
+    - npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
