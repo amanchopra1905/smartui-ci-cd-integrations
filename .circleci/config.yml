@@ -14,12 +14,10 @@ jobs:
       - run:
           name: Execute SmartUI tests
           command: |
-            pwd
             npm install
-            pwd
             npx smartui --version
             npx smartui config:create smartui-web.json
-            pwd
+            mvn --version
             npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
 
 workflows:
