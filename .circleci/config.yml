@@ -2,7 +2,7 @@ version: 2.1
 name: "SmartUI Circle CI"
 
 jobs:
-  build:
+  smartui-test:
     docker:
       - image: cimg/base:current
     steps:
@@ -13,3 +13,8 @@ jobs:
             npx smartui --version
             npx smartui config:create smartui-web.json
             npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
+
+workflows:
+  smartui-test-workflow:
+    jobs:
+      - smartui-test
