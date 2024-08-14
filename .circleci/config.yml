@@ -6,11 +6,10 @@ jobs:
     docker:
       - image: cimg/base:current
     steps:
+      - checkout
       - run:
           name: Execute SmartUI tests
           command: |
-            pwd
-            checkout
             pwd
             npm install
             npx smartui --version
