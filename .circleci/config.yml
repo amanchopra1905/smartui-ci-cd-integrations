@@ -1,19 +1,25 @@
 version: 2.1
 name: "SmartUI Circle CI"
 
+orbs:
+  node: circleci/node@5.2.0
+
 jobs:
   smartui-test:
-    docker:
-      - image: cimg/base:current
+    executor: node/default
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
           name: Execute SmartUI tests
           command: |
             pwd
             npm install
+            pwd
             npx smartui --version
             npx smartui config:create smartui-web.json
+            pwd
             npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
 
 workflows:
