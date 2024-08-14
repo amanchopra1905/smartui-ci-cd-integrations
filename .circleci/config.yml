@@ -9,6 +9,7 @@ jobs:
       - run:
           name: Execute SmartUI tests
           command: |
+            pwd
             npm install
             npx smartui --version
             npx smartui config:create smartui-web.json
