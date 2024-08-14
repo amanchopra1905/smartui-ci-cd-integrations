@@ -7,12 +7,9 @@ jobs:
       - image: cimg/base:current
     steps:
       - run:
-          name: Install dependencies
-          command: npm install
-
-      - run:
           name: Execute SmartUI tests
           command: |
+            npm install
             npx smartui --version
             npx smartui config:create smartui-web.json
             npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
