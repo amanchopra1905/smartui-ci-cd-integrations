@@ -53,9 +53,6 @@ jobs:
             curl -s https://get.sdkman.io | bash
             source $HOME/.sdkman/bin/sdkman-init.sh
             sdk install maven
-      - run:
-          name: Maven Build
-          command: |
             mvn --version
             mvn clean install
       - run:
