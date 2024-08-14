@@ -55,7 +55,9 @@ jobs:
             sdk install maven
       - run:
           name: Maven Build
-          command: mvn clean install
+          command: |
+            mvn --version
+            mvn clean install
       - run:
           name: Execute SmartUI tests
           command: |
