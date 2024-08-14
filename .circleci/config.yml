@@ -7,10 +7,22 @@ orbs:
 jobs:
   smartui-test:
     executor: node/default
+    docker:  
+      - image: circleci/openjdk:11
+    
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
+      - run:  
+          name: Install Maven  
+          command: |  
+            curl -s https://get.sdkman.io | bash  
+            source $HOME/.sdkman/bin/sdkman-init.sh  
+            sdk install maven  
+      - run:  
+          name: Maven Build  
+          command: mvn clean install  
       - run:
           name: Execute SmartUI tests
           command: |
