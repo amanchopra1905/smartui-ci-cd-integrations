@@ -1,0 +1,23 @@
+image: maven:3.8.8-eclipse-temurin-17  # Image with Maven and OpenJDK
+
+pipelines:
+  default:
+    - step:
+        name: Install Dependencies
+        script:
+          - mvn clean install  # Installs project dependencies
+
+    - step:
+        name: Configure SmartUI
+        script:
+          - npm install -g @lambdatest/smartui-cli  # Install SmartUI CLI globally
+          - npx smartui config:create .smartui.json  # Generate SmartUI config file
+
+    - step:
+        name: Run Visual Regression Tests
+        script:
+          # Set environment variables directly in the pipeline
+          - export LT_USERNAME=${LT_USERNAME}
+          - export LT_ACCESS_KEY=${LT_ACCESS_KEY}
+          - export PROJECT_TOKEN=${PROJECT_TOKEN}
+          - npx smartui --config .smartui.json exec -- mvn test -Dsuite=sdk-cloud.xml
