@@ -1,0 +1,37 @@
+version: v1.0
+name: SmartUI SDK Cloud Semaphore Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+agents:
+  - machine:
+      type: e1-standard-2
+      os_image: ubuntu2204
+environment:
+  LT_USERNAME: $LT_USERNAME
+  LT_ACCESS_KEY: $LT_ACCESS_KEY
+secrets:
+  - name: LT_CREDENTIALS
+    values:
+      LT_USERNAME: '{{ LT_USERNAME }}'
+      LT_ACCESS_KEY: '{{ LT_ACCESS_KEY }}'
+blocks:
+  - name: Execute SmartUI SDK Cloud Tests
+    task:
+      env_vars:
+        - name: PROJECT_TOKEN
+          value:
+            '[object Object]': null
+      secrets:
+        - name: LT_CREDENTIALS
+      jobs:
+        - name: Install Dependencies and Execute Tests
+          commands:
+            - checkout
+            - echo "Installing SmartUI CLI"
+            - npm install @lambdatest/smartui-cli
+            - echo "Running SmartUI tests"
+            - npx smartui --version
+            - 'npx smartui config:create smartui-web.json'
+            - npx smartui --config smartui-web.json exec -- mvn --quiet test -D suite=sdk-cloud.xml
