@@ -28,7 +28,7 @@ jobs:
 
       - name: Execute Java-TestNG-SmartUI tests
         env:
-          PROJECT_TOKEN_1: ${{ github.event.inputs.project_token_1 }}
+          PROJECT_TOKEN: ${{ github.event.inputs.project_token_1 }}
         run: |
           npx smartui --version
           npx smartui config:create smartui-web.json
@@ -36,7 +36,7 @@ jobs:
 
       - name: Execute Java-TestNG-SmartUI SmartUI tests
         env:
-          PROJECT_TOKEN_2: ${{ github.event.inputs.project_token_2 }}
+          PROJECT_TOKEN: ${{ github.event.inputs.project_token_2 }}
         run: |
           npx smartui --version
           npx smartui config:create smartui-web.json
