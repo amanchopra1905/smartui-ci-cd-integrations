@@ -3,8 +3,11 @@ name: SmartUI SDK Cloud GitHub Actions - Monorepo
 on:
   workflow_dispatch:
     inputs:
-      project_token:
-        description: Project Token
+      project_token_1:
+        description: Project Token - 1
+        required: true
+      project_token_2:
+        description: Project Token - 2
         required: true
 
 env:
